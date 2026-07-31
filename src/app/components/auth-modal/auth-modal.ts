@@ -1,9 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-auth-modal',
   imports: [],
   templateUrl: './auth-modal.html',
-  styleUrl: './auth-modal.css',
+  styleUrl: './auth-modal.css'
 })
-export class AuthModal {}
+export class AuthModal {
+  closeModal = output<void>();
+  isLogin = signal(true);
+
+  toggleMode() {
+    this.isLogin.set(!this.isLogin());
+  }
+}

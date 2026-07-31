@@ -1,1 +1,87 @@
-<p>vip-room works!</p>
+<section class="glass-panel p-6 lg:p-8 relative overflow-hidden">
+  <!-- Background Glow -->
+  <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -z-10"></div>
+  
+  <div class="flex flex-col lg:flex-row justify-between gap-8">
+    
+    <!-- Left: Win Rate & Status -->
+    <div class="lg:w-1/3 flex flex-col items-center justify-center text-center p-6 bg-slate-900/50 rounded-2xl border border-slate-700/50">
+      <div class="inline-flex items-center gap-2 mb-4">
+        <span class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+        </span>
+        <h3 class="text-xl font-bold text-emerald-400 tracking-wider uppercase">Live VIP Room</h3>
+      </div>
+      
+      <div class="relative w-40 h-40 flex items-center justify-center my-4">
+        <!-- SVG Circle Progress -->
+        <svg class="transform -rotate-90 w-40 h-40">
+          <circle cx="80" cy="80" r="70" stroke="currentColor" stroke-width="10" fill="transparent" class="text-slate-700" />
+          <circle cx="80" cy="80" r="70" stroke="currentColor" stroke-width="10" fill="transparent" stroke-dasharray="440" stroke-dashoffset="57" class="text-emerald-500 transition-all duration-1000" />
+        </svg>
+        <div class="absolute flex flex-col items-center justify-center">
+          <span class="text-4xl font-black text-white">{{ winRate }}%</span>
+          <span class="text-xs font-medium text-slate-400 uppercase tracking-widest">Win Rate</span>
+        </div>
+      </div>
+      
+      <p class="text-slate-300 mt-4">Our premium AI-driven predictions have maintained an {{ winRate }}% success rate over the last 30 days.</p>
+    </div>
+
+    <!-- Right: Live Tips Feed -->
+    <div class="lg:w-2/3 flex flex-col">
+      <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        Latest VIP Tips
+      </h3>
+      
+      <div class="space-y-4">
+        @for (tip of liveTips; track tip.match) {
+          <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700/50 flex flex-col sm:flex-row justify-between items-start sm:items-center hover:bg-slate-700/50 transition-colors group">
+            <div class="mb-3 sm:mb-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-semibold text-slate-400 bg-slate-900 px-2 py-1 rounded">{{ tip.time }}</span>
+                @if (tip.status === 'won') {
+                  <span class="text-xs font-bold text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    WON
+                  </span>
+                } @else {
+                  <span class="text-xs font-bold text-amber-500 bg-amber-500/10 px-2 py-1 rounded flex items-center gap-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <path d="M12 6v6l4 2"></path>
+                    </svg>
+                    PENDING
+                  </span>
+                }
+              </div>
+              <h4 class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">{{ tip.match }}</h4>
+            </div>
+            
+            <div class="flex items-center gap-4 bg-slate-900/80 p-3 rounded-lg border border-slate-700/50 w-full sm:w-auto justify-between sm:justify-start">
+              <div class="flex flex-col">
+                <span class="text-xs text-slate-400">Prediction</span>
+                <span class="font-bold text-white">{{ tip.prediction }}</span>
+              </div>
+              <div class="h-8 w-px bg-slate-700"></div>
+              <div class="flex flex-col items-end">
+                <span class="text-xs text-slate-400">Odds</span>
+                <span class="font-bold text-emerald-400">{{ tip.odds | number:'1.2-2' }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+      
+      <button class="mt-6 text-center w-full py-3 border border-emerald-500/30 rounded-xl text-emerald-400 font-semibold hover:bg-emerald-500/10 transition-colors">
+        Unlock All Premium Tips
+      </button>
+    </div>
+  </div>
+</section>
