@@ -1,4 +1,5 @@
 import { Component, signal, computed } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 interface Match {
   name: string;
@@ -10,13 +11,22 @@ interface Match {
 
 @Component({
   selector: 'app-hero',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './hero.html',
   styleUrl: './hero.css'
 })
 export class Hero {
-  leagues = ['All', 'EPL', 'La Liga', 'Serie A', 'Ligue 1', 'Bundesliga'];
+  leagues = ['All', 'EPL', 'La Liga', 'Serie A', 'Ligue 1', 'Bundesliga', 'Champions League', 'Europa League', 'MLS'];
   selectedLeague = signal<string>('All');
+  searchQuery = signal<string>('');
+
+  filteredLeagues = computed(() => {
+    const query = this.searchQuery().toLowerCase().trim();
+    if (!query) {
+      return this.leagues;
+    }
+    return this.leagues.filter(l => l.toLowerCase().includes(query));
+  });
 
   allMatches: Match[] = [
     { name: 'Real Madrid', vs: 'Barcelona', time: 'Today, 21:00', league: 'La Liga', odds: { 1: 2.1, X: 3.4, 2: 3.1 } },
