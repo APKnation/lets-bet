@@ -20,9 +20,9 @@
     </div>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+  <div class="flex overflow-x-auto lg:grid lg:grid-cols-4 gap-6 pb-4 lg:pb-0 snap-x scrollbar-hide">
     @for (platform of platforms; track platform.name) {
-      <div class="glass-panel p-6 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-all duration-300 hover:shadow-emerald-500/10 hover:border-emerald-500/30 group">
+      <div class="shrink-0 w-64 lg:w-auto snap-center glass-panel p-6 flex flex-col items-center justify-center text-center transform hover:-translate-y-2 transition-all duration-300 hover:shadow-emerald-500/10 hover:border-emerald-500/30 group">
         <!-- Logo Mock -->
         <div class="w-16 h-16 rounded-2xl mb-4 flex items-center justify-center shadow-lg shadow-black/50 {{ platform.color }}">
           <span class="text-xl font-black text-white">{{ platform.name | slice:0:1 }}</span>
