@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   imports: [],
   templateUrl: './header.html',
-  styleUrl: './header.css',
+  styleUrl: './header.css'
 })
-export class Header {}
+export class Header {
+  loginClick = output<void>();
+  registerClick = output<void>();
+}
