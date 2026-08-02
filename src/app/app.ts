@@ -7,6 +7,7 @@ import { BettingPlatforms } from './components/betting-platforms/betting-platfor
 import { Payments } from './components/payments/payments';
 import { Services } from './components/services/services';
 import { Footer } from './components/footer/footer';
+import { Background3D } from './components/background-3d/background-3d';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { Footer } from './components/footer/footer';
     BettingPlatforms, 
     Payments, 
     Services, 
-    Footer
+    Footer,
+    Background3D
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
